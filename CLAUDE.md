@@ -149,6 +149,123 @@ All code pushed to `master` or `main` must:
 - Be compatible with Python 3.8-3.11
 - Include valid `requirements.txt` if using dependencies
 
+## Context Management with Claude Code
+
+### Agents (컨텍스트 격리)
+
+Use agents to isolate complex tasks in separate contexts, improving token efficiency:
+
+```bash
+# Define specialized agents in .claude/agents.json
+{
+  "agents": [
+    {
+      "name": "code-reviewer",
+      "description": "코드 품질 및 보안 검토",
+      "tools": {"read": true, "grep": true, "edit": false}
+    },
+    {
+      "name": "test-engineer",
+      "description": "테스트 작성 및 분석",
+      "tools": {"read": true, "edit": true, "bash": true}
+    }
+  ]
+}
+
+# Delegate tasks to agents
+/agent code-reviewer "전체 코드 검토"
+/agent test-engineer "단위 테스트 작성"
+```
+
+**Benefits**: Main session stays clean, each agent works independently with isolated context.
+
+### Hooks (자동화된 규칙)
+
+Configure hooks in `.claude/settings.json` to enforce rules automatically:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [{
+      "matcher": "bash:git commit",
+      "hooks": [{"command": "pytest tests/ -v"}]
+    }],
+    "PostToolUse": [{
+      "matcher": "write:src/**/*.py",
+      "hooks": [{"command": "python -m black {file}"}]
+    }]
+  }
+}
+```
+
+**Key Principle**: Use "Block-at-Submit" pattern - don't block during work, only validate at commit time.
+
+### Slash Commands (재사용 가능한 워크플로우)
+
+Create custom commands in `.claude/commands/`:
+
+**`.claude/commands/catchup.md`**:
+```markdown
+---
+name: catchup
+description: 변경사항 분석 및 진행상황 파악
+---
+
+1. `git status --short` 실행
+2. `git diff HEAD` 분석
+3. 변경 파일 요약 및 다음 작업 제안
+```
+
+**Usage**:
+```bash
+/catchup      # 현재 상태 파악
+/test-debug   # 테스트 디버깅
+/pr-prep      # PR 준비 체크리스트
+```
+
+### Token Efficiency Strategy
+
+```
+Total Context: 200K tokens
+
+CLAUDE.md:        5K   (2.5%)  - Project fundamentals
+Slash commands:   5K   (2.5%)  - Workflows
+Working files:   40K  (20%)    - Current work
+Session history: 50K  (25%)    - Conversation
+Free buffer:     95K  (50%)    - Additional context
+```
+
+**Best Practices**:
+- Keep CLAUDE.md concise (2-5KB)
+- Use `/context` to monitor token usage
+- Use `/clear` or `/compact` to clean up sessions
+- Delegate complex tasks to specialized agents
+
+### Recommended Workflow
+
+```bash
+# 1. Start session (CLAUDE.md auto-loads)
+claude
+
+# 2. Catch up on changes
+/catchup
+
+# 3. Work on features
+"Implement JWT authentication"
+
+# 4. Debug if needed
+/test-debug
+
+# 5. Commit (hooks validate automatically)
+git commit -m "Add authentication"
+
+# 6. Prepare PR
+/pr-prep
+
+# 7. Code review (agent delegation)
+/agent code-reviewer "Review all changes"
+```
+
 ## Security Policy
 
 See `SECURITY.md` for comprehensive security guidelines including:
