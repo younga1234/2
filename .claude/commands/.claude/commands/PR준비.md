@@ -1,5 +1,5 @@
 ---
-name: pr-prep
+name: PR준비
 description: Pull Request 제출 전 준비 체크리스트
 ---
 
@@ -7,13 +7,13 @@ description: Pull Request 제출 전 준비 체크리스트
 
 ## 1. 코드 품질 검사
 
-### Linting
+### 린팅
 ```bash
 python -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 python -m flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 ```
 
-### 포매팅 (있는 경우)
+### 포매팅 (설치된 경우)
 ```bash
 python -m black . --check || true
 ```
@@ -51,28 +51,41 @@ git log master..HEAD --oneline
 feat: JWT 인증 시스템 추가
 fix: 사용자 권한 검사 버그 수정
 docs: API 문서 업데이트
+refactor: 인증 모듈 리팩토링
+test: 사용자 API 테스트 추가
 ```
 
 ### 설명 템플릿
 ```markdown
-## 📝 Summary
+## 📝 요약
 - 변경 사항 요약 (3-5줄)
 
-## 🎯 Motivation
+## 🎯 배경 및 목적
 - 왜 이 변경이 필요한가?
+- 어떤 문제를 해결하는가?
 
-## 🔧 Changes
-- 주요 변경 사항 목록
+## 🔧 주요 변경사항
+- 변경 내용을 항목별로 나열
+- 각 변경의 이유 설명
 
-## ✅ Testing
+## ✅ 테스트
 - 어떻게 테스트했는가?
 - 테스트 커버리지: XX%
+- 수동 테스트 시나리오
 
-## 📸 Screenshots (UI 변경시)
-- 스크린샷 또는 데모
+## 📸 스크린샷 (UI 변경시)
+- Before/After 스크린샷
+- 데모 영상 링크
 
 ## ⚠️ Breaking Changes
 - 하위 호환성 문제가 있다면 명시
+- 마이그레이션 가이드 제공
+
+## 📋 체크리스트
+- [ ] 테스트 추가/업데이트
+- [ ] 문서 업데이트
+- [ ] CHANGELOG 업데이트
+- [ ] 코드 리뷰 준비 완료
 ```
 
 ## 6. 최종 확인
@@ -83,5 +96,6 @@ docs: API 문서 업데이트
 - [ ] `.env` 파일 커밋 안 됨
 - [ ] 민감 정보 노출 없음
 - [ ] 문서 업데이트 완료
+- [ ] Breaking changes 문서화
 
 위 체크리스트를 확인하고 PR 정보를 제공하세요.
