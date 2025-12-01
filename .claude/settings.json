@@ -20,6 +20,15 @@
             "command": "bash hooks/post-write-format.sh"
           }
         ]
+      },
+      {
+        "matcher": "write:.claude/mcp-servers.json",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash hooks/mcp-health-check.sh"
+          }
+        ]
       }
     ],
     "SessionStart": [
@@ -29,6 +38,10 @@
           {
             "type": "command",
             "command": "bash hooks/session-start.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash hooks/mcp-server-monitor.sh"
           }
         ]
       }

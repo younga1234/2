@@ -1,0 +1,36 @@
+{
+  "mcpServers": {
+    "example-python-server": {
+      "command": "python",
+      "args": ["scripts/mcp-server.py"],
+      "env": {
+        "MCP_SERVER_PORT": "3000",
+        "MCP_LOG_LEVEL": "info"
+      },
+      "description": "Python MCP 서버 예제"
+    },
+    "example-node-server": {
+      "command": "node",
+      "args": ["scripts/mcp-server.js"],
+      "env": {
+        "MCP_SERVER_PORT": "3001",
+        "MCP_LOG_LEVEL": "info"
+      },
+      "description": "Node.js MCP 서버 예제"
+    }
+  },
+  "settings": {
+    "autoStart": false,
+    "autoReconnect": true,
+    "maxRetries": 3,
+    "retryDelay": 1000,
+    "timeout": 30000
+  },
+  "logging": {
+    "enabled": true,
+    "level": "info",
+    "directory": ".claude/logs",
+    "maxSize": "10MB",
+    "maxFiles": 30
+  }
+}
