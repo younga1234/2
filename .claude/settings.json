@@ -32,6 +32,17 @@
           }
         ]
       }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash hooks/session-end.sh"
+          }
+        ]
+      }
     ]
   }
 }

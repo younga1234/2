@@ -35,6 +35,9 @@ data/
 browser_state/
 auth_info.json
 
+# Claude Code session data
+.claude/session-data/
+
 # IDE
 .vscode/
 .idea/
