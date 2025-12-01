@@ -38,12 +38,17 @@ if [ -d ".claude" ]; then
     echo "   - 훅 스크립트: $(ls hooks/*.sh 2>/dev/null | wc -l) 개"
 fi
 
-# 5. 다음 세션을 위한 힌트
+# 5. 자동 로깅
+export EVENT_TYPE="session_end"
+bash hooks/auto-logger.sh
+
+# 6. 다음 세션을 위한 힌트
 echo ""
 echo "💡 다음 세션 시작 시:"
 echo "   /현황파악 - 현재 상태 확인"
 echo "   /컨텍스트관리 - 토큰 사용량 확인"
 echo ""
 echo "✅ 세션 종료 완료"
+echo "📝 세션 로그: .claude/logs/session_$(date +%Y-%m-%d).log"
 
 exit 0

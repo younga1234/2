@@ -62,5 +62,10 @@ echo ""
 # 8. 현재 세션 시작 시간 기록
 echo "$(date +"%Y-%m-%d %H:%M:%S") - 세션 시작" > .claude/session-data/current-session.txt
 
+# 9. 자동 로깅
+export EVENT_TYPE="session_start"
+bash hooks/auto-logger.sh
+
 echo "✅ 세션 초기화 완료"
+echo "📝 세션 로그: .claude/logs/session_$(date +%Y-%m-%d).log"
 exit 0

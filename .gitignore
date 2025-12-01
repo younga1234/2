@@ -38,6 +38,9 @@ auth_info.json
 # Claude Code session data
 .claude/session-data/
 
+# Claude Code logs (선택적으로 추적 가능)
+.claude/logs/
+
 # IDE
 .vscode/
 .idea/
