@@ -1,0 +1,37 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "bash:git commit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash hooks/pre-commit-validation.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "write:src/**/*.py",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash hooks/post-write-format.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash hooks/session-start.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
