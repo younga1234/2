@@ -38,17 +38,17 @@ Four pre-configured agents for common development tasks:
 /agent security-auditor "Scan for vulnerabilities"
 ```
 
-### ⚡ Slash Commands
+### ⚡ Slash Commands (슬래시 커맨드)
 
-Five workflow commands for common operations:
+Five workflow commands for common operations (한국어 명령어 지원):
 
-| Command | Description |
-|---------|-------------|
-| `/catchup` | Analyze recent changes and project status |
-| `/test-debug` | Debug failing tests with root cause analysis |
-| `/pr-prep` | PR preparation checklist (lint, test, format) |
-| `/security-check` | Security audit (secrets, injection, XSS) |
-| `/refactor-plan` | Refactoring impact analysis and planning |
+| 명령어 | 설명 | Command |
+|--------|------|---------|
+| `/현황파악` | 변경사항 분석 및 현재 진행상황 파악 | Analyze recent changes and project status |
+| `/테스트디버깅` | 실패한 테스트 분석 및 디버깅 | Debug failing tests with root cause analysis |
+| `/PR준비` | Pull Request 제출 전 준비 체크리스트 | PR preparation checklist (lint, test, format) |
+| `/보안검사` | 보안 취약점 검사 (비밀키, SQL injection, XSS 등) | Security audit (secrets, injection, XSS) |
+| `/리팩토링계획` | 리팩토링 계획 수립 및 영향 분석 | Refactoring impact analysis and planning |
 
 ### 🔒 Automated Hooks
 
@@ -121,8 +121,8 @@ The repository includes automated CI/CD:
 ### Starting a New Feature
 
 ```bash
-# 1. Check current status
-/catchup
+# 1. Check current status (현황 파악)
+/현황파악
 
 # 2. Create feature branch
 git checkout -b feature/user-auth
@@ -130,18 +130,18 @@ git checkout -b feature/user-auth
 # 3. Implement feature
 "Implement JWT authentication with refresh tokens"
 
-# 4. Run security check
-/security-check
+# 4. Run security check (보안 검사)
+/보안검사
 
-# 5. Prepare PR
-/pr-prep
+# 5. Prepare PR (PR 준비)
+/PR준비
 ```
 
 ### Debugging Test Failures
 
 ```bash
-# Automatic test analysis and fix suggestions
-/test-debug
+# Automatic test analysis and fix suggestions (테스트 디버깅)
+/테스트디버깅
 
 # Agent-assisted debugging
 /agent test-engineer "Debug authentication tests"
