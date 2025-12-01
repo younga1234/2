@@ -218,9 +218,11 @@ description: 변경사항 분석 및 진행상황 파악
 
 **Usage**:
 ```bash
-/catchup      # 현재 상태 파악
-/test-debug   # 테스트 디버깅
-/pr-prep      # PR 준비 체크리스트
+/현황파악           # 변경사항 분석 및 현재 진행상황 파악
+/테스트디버깅       # 실패한 테스트 분석 및 디버깅
+/PR준비            # Pull Request 제출 전 준비 체크리스트
+/보안검사          # 보안 취약점 검사 (비밀키, SQL injection, XSS 등)
+/리팩토링계획      # 리팩토링 계획 수립 및 영향 분석
 ```
 
 ### Token Efficiency Strategy
@@ -247,20 +249,20 @@ Free buffer:     95K  (50%)    - Additional context
 # 1. Start session (CLAUDE.md auto-loads)
 claude
 
-# 2. Catch up on changes
-/catchup
+# 2. Catch up on changes (현황 파악)
+/현황파악
 
 # 3. Work on features
 "Implement JWT authentication"
 
-# 4. Debug if needed
-/test-debug
+# 4. Debug if needed (테스트 디버깅)
+/테스트디버깅
 
 # 5. Commit (hooks validate automatically)
 git commit -m "Add authentication"
 
-# 6. Prepare PR
-/pr-prep
+# 6. Prepare PR (PR 준비)
+/PR준비
 
 # 7. Code review (agent delegation)
 /agent code-reviewer "Review all changes"
